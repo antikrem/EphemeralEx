@@ -15,9 +15,9 @@ namespace EphemeralExTests.Extensions
         [Test]
         public void ForEach_WithPredicate_ExecutePredicateOnSequence()
         {
-            var item1 = Some.Int(-1000, 1000);
-            var item2 = Some.Int(-1000, 1000);
-            var item3 = Some.Int(-1000, 1000);
+            var item1 = Dummy.Int(-1000, 1000);
+            var item2 = Dummy.Int(-1000, 1000);
+            var item3 = Dummy.Int(-1000, 1000);
             var items = new int[] { item1, item2, item3 };
 
             var result = 0;
@@ -29,7 +29,7 @@ namespace EphemeralExTests.Extensions
         [Test]
         public void ToEnumerable_WithValueItem_ReturnsEnumerable()
         {
-            var item = Some.Int();
+            var item = Dummy.Int();
 
             var result = item.ToEnumerable();
 
@@ -49,7 +49,7 @@ namespace EphemeralExTests.Extensions
         [Test]
         public void None_WithFalseConditionToAllElements_ReturnsTrue()
         {
-            var items = new int[] { Some.Int(0, 1000), Some.Int(0, 1000), Some.Int(0, 1000) };
+            var items = new int[] { Dummy.Int(0, 1000), Dummy.Int(0, 1000), Dummy.Int(0, 1000) };
 
             var result = items.None(value => value < 0);
 
@@ -59,7 +59,7 @@ namespace EphemeralExTests.Extensions
         [Test]
         public void None_WithTrueConditionToAllElements_ReturnsFalse()
         {
-            var items = new int[] { Some.Int(0, 1000), Some.Int(0, 1000), Some.Int(0, 1000) };
+            var items = new int[] { Dummy.Int(0, 1000), Dummy.Int(0, 1000), Dummy.Int(0, 1000) };
 
             var result = items.None(value => value > 0);
 
@@ -69,7 +69,7 @@ namespace EphemeralExTests.Extensions
         [Test]
         public void None_WithMixedCondition_ReturnsFalse()
         {
-            var items = new int[] { -Some.Int(0, 1000), Some.Int(0, 1000), Some.Int(0, 1000) };
+            var items = new int[] { -Dummy.Int(0, 1000), Dummy.Int(0, 1000), Dummy.Int(0, 1000) };
 
             var result = items.None(value => value < 0);
 
@@ -79,9 +79,9 @@ namespace EphemeralExTests.Extensions
         [Test]
         public void ChainCall_WithSequence_CallsActionForEachElement()
         {
-            var item1 = Some.Int(0, 1000);
-            var item2 = Some.Int(0, 1000);
-            var item3 = Some.Int(0, 1000);
+            var item1 = Dummy.Int(0, 1000);
+            var item2 = Dummy.Int(0, 1000);
+            var item3 = Dummy.Int(0, 1000);
             var sequence = new int[] { item1, item2, item3 };
             var start = "Numbers:";
 

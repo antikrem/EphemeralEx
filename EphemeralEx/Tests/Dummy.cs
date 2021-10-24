@@ -6,7 +6,7 @@ using EphemeralEx.Extensions;
 
 namespace EphemeralEx.Tests
 {
-    public static class Some
+    public static class Dummy
     {
         static readonly Random _random =  new();
 
