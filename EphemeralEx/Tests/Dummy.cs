@@ -15,8 +15,7 @@ namespace EphemeralEx.Tests
 
         public static string String(int length = 16)
             => Enumerable.Range(0, length)
-                .Select(_ => _random.Next(0, 26))
-                .Select(offset => (char)('a' + offset))
+                .Select(_ => (char)_random.Next('a', 'z'))
                 .Concat();
     }
 }
