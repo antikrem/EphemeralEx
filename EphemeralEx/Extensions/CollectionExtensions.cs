@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace EphemeralEx.Extensions
 {
-    static class CollectionExtensions
+    public static class CollectionExtensions
     {
         public static void ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
         {

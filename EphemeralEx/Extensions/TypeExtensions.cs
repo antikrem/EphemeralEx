@@ -3,7 +3,7 @@ using System;
 
 namespace EphemeralEx.Extensions
 {
-    static class TypeExtensions
+    public static class TypeExtensions
     {
         public static bool IsSimple(this Type type)
             => type.IsPrimitive

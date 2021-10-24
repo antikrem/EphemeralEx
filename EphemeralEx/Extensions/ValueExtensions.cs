@@ -3,7 +3,7 @@
 
 namespace EphemeralEx.Extensions
 {
-    static class ValueExtensions
+    public static class ValueExtensions
     {
         public static string ToHexString(this ulong value)
         {
