@@ -1,4 +1,4 @@
-﻿namespace tag_h.Injection.DI
+﻿namespace EphemeralEx.Injection
 {
     public interface IStopOnDejection
     {

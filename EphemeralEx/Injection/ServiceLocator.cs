@@ -1,7 +1,7 @@
-﻿using EphemeralEx.Injection;
-using System;
+﻿using System;
 
-namespace tag_h.Injection.DI
+
+namespace EphemeralEx.Injection
 {
     public class ServiceNotFoundException : Exception
     {
