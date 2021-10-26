@@ -12,7 +12,7 @@ namespace EphemeralEx.Injection
 {
     class MultipleInjectionPointsFoundException : Exception { };
 
-    static class InjectionModule
+    public static class InjectionModule
     {
         public static void AddRegisteredInjections(this IServiceCollection services)
         {
