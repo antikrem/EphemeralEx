@@ -25,7 +25,7 @@ namespace EphemeralEx.Injection
         private static IEnumerable<(Type service, Type implementation)> GetInjectionDefinitions()
         {
             return GetInjectableInterfaces()
-                .Select(parent => (parent, GetImplementation(parent)));
+                .Select(service => (service, GetImplementation(service)));
         }
 
         private static ServiceDescriptor CreateServiceDescription((Type service, Type implementation) definition)
