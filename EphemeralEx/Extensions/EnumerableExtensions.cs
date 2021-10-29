@@ -16,6 +16,29 @@ namespace EphemeralEx.Extensions
             }
         }
 
+        public static IEnumerable<S> SelectSuccessful<E, T, S>(
+            this IEnumerable<T> sequence,
+            Func<T, S> selector,
+            Action<T, E>? errorHandler = null)
+            where E : Exception
+        {
+            var results = new List<S>();
+
+            foreach (var element in sequence)
+            {
+                try
+                {
+                    results.Add(selector(element));
+                }
+                catch (E exception)
+                {
+                    errorHandler?.Invoke(element, exception);
+                }
+            }
+
+            return results;
+        }
+
         public static void ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
         {
             foreach (T t in sequence)

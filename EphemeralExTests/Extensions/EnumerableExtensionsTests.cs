@@ -6,6 +6,8 @@ using NUnit.Framework;
 using FluentAssertions;
 
 using EphemeralEx.Tests;
+using System;
+using System.Collections.Generic;
 
 namespace EphemeralExTests.Extensions
 {
@@ -23,6 +25,37 @@ namespace EphemeralExTests.Extensions
 
             result.Should().HaveCount(1);
             result.Should().BeEquivalentTo(item2.ToEnumerable());
+        }
+
+        [Test]
+        public void SelectSuccessful_WithCorrectUsage_OnlyTakesSuccessfulElements()
+        {
+            var items = new int[] { 1, 2, 0, 3 };
+
+            var result = items.SelectSuccessful<DivideByZeroException, int, int>(value => 6 / value);
+
+            result.Should().HaveCount(3);
+            result.Should().BeEquivalentTo(new List<int> { 6, 3, 2 });
+        }
+
+        [Test]
+        public void SelectSuccessful_WithIncorrectExceptionArgument_OnlyTakesSuccessfulElements()
+        {
+            var items = new int[] { 1, 2, 0, 3 };
+
+            items.Invoking(i => i.SelectSuccessful<ArgumentException, int, int>(value => 6 / value))
+                .Should().Throw<DivideByZeroException>();
+        }
+
+        [Test]
+        public void SelectSuccessful_WithExceptionHandler_RunsExceptionHandler()
+        {
+            var items = new int[] { 1, 2, 0, 3 };
+            var handled = false;
+
+            var result = items.SelectSuccessful<DivideByZeroException, int, int>(value => 6 / value, (_, _) => handled = true);
+
+            handled.Should().BeTrue();
         }
 
         [Test]
