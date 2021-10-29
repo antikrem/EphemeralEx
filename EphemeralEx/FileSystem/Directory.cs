@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+
 namespace EphemeralEx.FileSystem
 {
     public class Directory : IFile
@@ -20,15 +21,15 @@ namespace EphemeralEx.FileSystem
             => ((IEnumerable<IFile>)ChildFiles)
                 .Concat(ChildDirectories);
 
-        public IEnumerable<Directory> ChildFiles
+        public IEnumerable<File> ChildFiles
             => _directoryInfo
                 .EnumerateFiles()
-                .Select(file => (Directory)IFile.Create(file.FullName));
+                .Select(file => (File)IFile.Create(file.FullName));
 
-        public IEnumerable<File> ChildDirectories
+        public IEnumerable<Directory> ChildDirectories
             => _directoryInfo
                 .EnumerateFileSystemInfos()
-                .Select(file => (File)IFile.Create(file.FullName));
+                .Select(file => (Directory)IFile.Create(file.FullName));
 
         public Uri Path => new(_directoryInfo.FullName);
     }
