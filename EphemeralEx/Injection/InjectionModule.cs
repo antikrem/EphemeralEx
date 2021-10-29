@@ -23,15 +23,11 @@ namespace EphemeralEx.Injection
         }
 
         private static IEnumerable<(Type service, Type implementation)> GetInjectionDefinitions()
-        {
-            return GetInjectableInterfaces()
+            => GetInjectableInterfaces()
                 .Select(service => (service, GetImplementation(service)));
-        }
 
         private static ServiceDescriptor CreateServiceDescription((Type service, Type implementation) definition)
-        {
-            return new ServiceDescriptor(definition.service, definition.implementation, ServiceLifetime.Singleton);
-        }
+            => new ServiceDescriptor(definition.service, definition.implementation, ServiceLifetime.Singleton);
 
         private static Type GetImplementation(Type serviceEntry)
         {
@@ -46,10 +42,8 @@ namespace EphemeralEx.Injection
         }
 
         private static IEnumerable<Type> GetInjectableInterfaces()
-        {
-            return ReflectionHelper
+            => ReflectionHelper
                 .AllTypes
                 .Where(type => type.IsAttributed<Injectable>());
-        }
     }
 }
