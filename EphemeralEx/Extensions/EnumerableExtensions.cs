@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace EphemeralEx.Extensions
 {
-    public static class CollectionExtensions
+    public static class EnumerableExtensions
     {
-        public static IEnumerable<S> OfType<S, T>(this IEnumerable<T> sequence)
+        public static IEnumerable<S> OfType<T, S>(this IEnumerable<T> sequence)
             where S : T
         {
             foreach (var element in sequence)
@@ -36,21 +35,5 @@ namespace EphemeralEx.Extensions
                 ? action(target, sequence.First())
                     .ChainCall(sequence.Skip(1), action)
                 : target;
-
-        public static TValue AddAndReturn<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue backup)
-        {
-            dictionary.Add(key, backup);
-            return backup;
-        }
-
-        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue alternative) 
-            => dictionary.TryGetValue(key, out TValue val) 
-                ? val 
-                : dictionary.AddAndReturn(key, alternative);
-
-        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> generator)
-            => dictionary.TryGetValue(key, out TValue val)
-                ? val
-                : dictionary.AddAndReturn(key, generator());
     }
 }
