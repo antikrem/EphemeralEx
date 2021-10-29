@@ -17,17 +17,18 @@ namespace EphemeralEx.FileSystem
         public FileType Type => FileType.Directory;
 
         public IEnumerable<IFile> Children
-            => ChildFiles.Concat(ChildDirectories);
+            => ((IEnumerable<IFile>)ChildFiles)
+                .Concat(ChildDirectories);
 
-        public IEnumerable<IFile> ChildFiles
+        public IEnumerable<Directory> ChildFiles
             => _directoryInfo
                 .EnumerateFiles()
-                .Select(file => IFile.Create(file.FullName));
+                .Select(file => (Directory)IFile.Create(file.FullName));
 
-        public IEnumerable<IFile> ChildDirectories
+        public IEnumerable<File> ChildDirectories
             => _directoryInfo
                 .EnumerateFileSystemInfos()
-                .Select(file => IFile.Create(file.FullName));
+                .Select(file => (File)IFile.Create(file.FullName));
 
         public Uri Path => new(_directoryInfo.FullName);
     }
