@@ -28,7 +28,7 @@ namespace EphemeralEx.FileSystem
 
         public IEnumerable<Directory> ChildDirectories
             => _directoryInfo
-                .EnumerateFileSystemInfos()
+                .EnumerateDirectories()
                 .Select(file => (Directory)IFile.Create(file.FullName));
 
         public Uri Path => new(_directoryInfo.FullName);
