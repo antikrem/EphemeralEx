@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace EphemeralEx.FileSystem
 {
     public class InvalidFileURL : Exception
@@ -23,8 +24,8 @@ namespace EphemeralEx.FileSystem
         {
             var attributes = GetAttributes(path);
 
-            return attributes.HasFlag(FileAttributes.Directory) 
-                ? new Directory(new DirectoryInfo(path)) 
+            return attributes.HasFlag(FileAttributes.Directory)
+                ? new Directory(new DirectoryInfo(path))
                 : new File(new FileInfo(path));
         }
 
