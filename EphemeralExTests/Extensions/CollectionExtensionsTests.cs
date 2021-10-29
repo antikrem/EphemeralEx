@@ -14,6 +14,20 @@ namespace EphemeralExTests.Extensions
     public class CollectionExtensionsTests
     {
         [Test]
+        public void OfType_WithMixedElements_FiltersOnlyRequestedType()
+        {
+            var item1 = Dummy.Int();
+            var item2 = Dummy.String();
+            var item3 = Dummy.Int();
+            var items = new object[] { item1, item2, item3 };
+
+            var result = items.OfType<string>();
+
+            result.Should().HaveCount(1);
+            result.Should().BeEquivalentTo(item2.ToEnumerable());
+        }
+
+        [Test]
         public void ForEach_WithPredicate_ExecutePredicateOnSequence()
         {
             var item1 = Dummy.Int(-1000, 1000);

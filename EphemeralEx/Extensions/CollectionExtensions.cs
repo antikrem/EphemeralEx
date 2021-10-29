@@ -7,6 +7,16 @@ namespace EphemeralEx.Extensions
 {
     public static class CollectionExtensions
     {
+        public static IEnumerable<S> OfType<S, T>(this IEnumerable<T> sequence)
+            where S : T
+        {
+            foreach (var element in sequence)
+            {
+                if (element is S s)
+                    yield return s;
+            }
+        }
+
         public static void ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
         {
             foreach (T t in sequence)
