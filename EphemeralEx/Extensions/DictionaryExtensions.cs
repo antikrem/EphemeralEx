@@ -13,12 +13,12 @@ namespace EphemeralEx.Extensions
         }
 
         public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue alternative) 
-            => dictionary.TryGetValue(key, out TValue val) 
+            => dictionary.TryGetValue(key, out TValue? val) 
                 ? val 
                 : dictionary.AddAndReturn(key, alternative);
 
         public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> generator)
-            => dictionary.TryGetValue(key, out TValue val)
+            => dictionary.TryGetValue(key, out TValue? val)
                 ? val
                 : dictionary.AddAndReturn(key, generator());
     }
