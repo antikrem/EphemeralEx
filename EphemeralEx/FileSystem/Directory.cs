@@ -17,6 +17,8 @@ namespace EphemeralEx.FileSystem
 
         public FileType Type => FileType.Directory;
 
+        public string Name => _directoryInfo.Name;
+
         public IEnumerable<IFile> Children
             => ((IEnumerable<IFile>)ChildFiles)
                 .Concat(ChildDirectories);
@@ -32,5 +34,6 @@ namespace EphemeralEx.FileSystem
                 .Select(file => (Directory)IFile.Create(file.FullName));
 
         public Uri Path => new(_directoryInfo.FullName);
+
     }
 }

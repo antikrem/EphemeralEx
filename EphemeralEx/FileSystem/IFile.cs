@@ -20,6 +20,8 @@ namespace EphemeralEx.FileSystem
 
         Uri Path { get; }
 
+        string Name { get; }
+
         public static IFile Create(string path)
         {
             var attributes = GetAttributes(path);

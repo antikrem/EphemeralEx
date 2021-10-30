@@ -17,6 +17,10 @@ namespace EphemeralEx.FileSystem
 
         public FileType Type => FileType.File;
 
+        public string Name => _fileInfo.Name;
+
+        public string Extension => _fileInfo.Extension;
+
         public IEnumerable<IFile> Children => Enumerable.Empty<IFile>();
 
         public Uri Path => new(_fileInfo.FullName);
