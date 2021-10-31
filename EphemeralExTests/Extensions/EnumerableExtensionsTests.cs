@@ -28,13 +28,24 @@ namespace EphemeralExTests.Extensions
         }
 
         [Test]
+        public void DistinctBy_WithMixedElements_RemovesFollowingDuplicates()
+        {
+            var items = new (int Index, string Value)[] { (1, "a"), (2, "a"), (3, "a"), (1, "b") };
+
+            var result = items.DistinctBy(join => join.Index);
+
+            result.Should().BeEquivalentTo(
+                    new (int Index, string Value)[] { (1, "a"), (2, "a"), (3, "a") }
+                );
+        }
+
+        [Test]
         public void SelectSuccessful_WithCorrectUsage_OnlyTakesSuccessfulElements()
         {
             var items = new int[] { 1, 2, 0, 3 };
 
             var result = items.SelectSuccessful<DivideByZeroException, int, int>(value => 6 / value);
 
-            result.Should().HaveCount(3);
             result.Should().BeEquivalentTo(new List<int> { 6, 3, 2 });
         }
 
