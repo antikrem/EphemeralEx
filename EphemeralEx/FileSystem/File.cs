@@ -23,6 +23,6 @@ namespace EphemeralEx.FileSystem
 
         public IEnumerable<IFile> Children => Enumerable.Empty<IFile>();
 
-        public Uri Path => new(_fileInfo.FullName);
+        public string Path => _fileInfo.FullName;
     }
 }

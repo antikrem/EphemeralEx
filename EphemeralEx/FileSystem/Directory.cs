@@ -33,7 +33,7 @@ namespace EphemeralEx.FileSystem
                 .EnumerateDirectories()
                 .Select(file => (Directory)IFile.Create(file.FullName));
 
-        public Uri Path => new(_directoryInfo.FullName);
+        public string Path => _directoryInfo.FullName;
 
     }
 }

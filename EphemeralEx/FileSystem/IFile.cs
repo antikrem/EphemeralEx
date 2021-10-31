@@ -18,7 +18,7 @@ namespace EphemeralEx.FileSystem
 
         IEnumerable<IFile> Children { get; }
 
-        Uri Path { get; }
+        string Path { get; }
 
         string Name { get; }
 
