@@ -5,9 +5,9 @@ using System.IO;
 
 namespace EphemeralEx.FileSystem
 {
-    public class InvalidFileURL : Exception
+    public class InvalidFilePath : Exception
     {
-        internal InvalidFileURL(string path)
+        internal InvalidFilePath(string path)
             : base($"{path} is not a valid path for a file or directory")
         { }
     }
@@ -39,7 +39,7 @@ namespace EphemeralEx.FileSystem
             }
             catch (Exception e) when (e is FileNotFoundException or DirectoryNotFoundException)
             {
-                throw new InvalidFileURL(path);
+                throw new InvalidFilePath(path);
             }
         }
     }
