@@ -28,6 +28,20 @@ namespace EphemeralExTests.Extensions
         }
 
         [Test]
+        public void NotNull_WithMixedElements_FiltersAllNulls()
+        {
+            var item1 = Dummy.String();
+            var item2 = (string?)null;
+            var item3 = Dummy.String();
+            var items = new string?[] { item1, item2, item3 };
+
+            var result = items.NotNull();
+
+            result.Should().HaveCount(2);
+            result.Should().BeEquivalentTo(new string[] { item1, item3 });
+        }
+
+        [Test]
         public void DistinctBy_WithMixedElements_RemovesFollowingDuplicates()
         {
             var items = new (int Index, string Value)[] { (1, "a"), (2, "a"), (3, "a"), (1, "b") };

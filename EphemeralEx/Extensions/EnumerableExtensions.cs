@@ -16,6 +16,15 @@ namespace EphemeralEx.Extensions
             }
         }
 
+        public static IEnumerable<T> NotNull<T>(this IEnumerable<T?> sequence)
+        {
+            foreach (var element in sequence)
+            {
+                if (element != null)
+                    yield return element;
+            }
+        }
+
         public static IEnumerable<T> DistinctBy<T, S>(this IEnumerable<T> sequence, Func<T, S> indexer)
             => sequence
                 .GroupBy(indexer)
