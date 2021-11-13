@@ -43,6 +43,20 @@ namespace EphemeralExTests.Extensions
         }
 
         [Test]
+        public void Flatten_WithSequenceOfSequences_ReturnsOneSequence()
+        {
+            var item1 = Dummy.Int();
+            var item2 = Dummy.Int();
+            var item3 = Dummy.Int();
+            var item4 = Dummy.Int();
+            var items = new int[][] { new int[] { item1, item2 }, new int[] { item3, item4 } };
+
+            var result = items.Flatten();
+
+            result.Should().BeEquivalentTo(new int[] { item1, item2, item3, item4 });
+        }
+
+        [Test]
         public void DistinctBy_WithMixedElements_RemovesFollowingDuplicates()
         {
             var items = new (int Index, string Value)[] { (1, "a"), (2, "a"), (3, "a"), (1, "b") };
