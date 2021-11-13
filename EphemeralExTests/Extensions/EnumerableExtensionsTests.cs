@@ -1,13 +1,14 @@
 ﻿using EphemeralEx.Extensions;
 
+using System;
 using System.Linq;
+using System.Collections.Generic;
 
 using NUnit.Framework;
 using FluentAssertions;
 
 using EphemeralEx.Tests;
-using System;
-using System.Collections.Generic;
+
 
 namespace EphemeralExTests.Extensions
 {
