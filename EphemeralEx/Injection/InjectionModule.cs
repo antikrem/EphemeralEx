@@ -31,14 +31,18 @@ namespace EphemeralEx.Injection
 
         private static Type GetImplementation(Type serviceEntry)
         {
-
             var implementations = ReflectionHelper
                 .AllTypes
                 .Where(implementation => serviceEntry.IsAssignableFrom(implementation) && implementation != serviceEntry);
 
-            if (implementations.Count() != 1) throw new MultipleInjectionPointsFoundException();
-
-            return implementations.First();
+            try
+            {
+                return implementations.Single();
+            }
+            catch (InvalidOperationException)
+            {
+                throw new MultipleInjectionPointsFoundException();
+            }
         }
 
         private static IEnumerable<Type> GetInjectableInterfaces()
