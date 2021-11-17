@@ -1,8 +1,11 @@
 ﻿using EphemeralEx.Extensions;
+
 using FluentAssertions;
 using NUnit.Framework;
+
 using System.Collections.Generic;
 using System.Linq;
+
 
 namespace EphemeralExTests.Extensions
 {

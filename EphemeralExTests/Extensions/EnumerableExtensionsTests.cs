@@ -1,11 +1,11 @@
 ﻿using EphemeralEx.Extensions;
 
+using NUnit.Framework;
+using FluentAssertions;
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
-
-using NUnit.Framework;
-using FluentAssertions;
 
 using EphemeralEx.Tests;
 
