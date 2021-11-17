@@ -16,6 +16,7 @@ namespace EphemeralEx.Extensions
             => type.IsDefined(typeof(T), false);
 
         public static bool Inherits<T>(this Type type)
-            => typeof(T).IsAssignableFrom(type);
+            => typeof(T).IsAssignableFrom(type)
+                && typeof(T) != type;
     }
 }

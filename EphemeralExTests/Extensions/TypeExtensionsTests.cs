@@ -25,21 +25,27 @@ namespace EphemeralExTests.Extensions
             var result = typeof(Implementation).Inherits<IBase>();
 
             result.Should().Be(true);
-
         }
 
         [Test]
         public void Inherits_WithSubType_ReturnsTrue()
         {
-            var result = typeof(Extensions).Inherits<Implementation>();
+            var result = typeof(Extension).Inherits<Implementation>();
 
             result.Should().Be(true);
+        }
 
+        [Test]
+        public void Inherits_WithSameType_ReturnsFalse()
+        {
+            var result = typeof(Extension).Inherits<Extension>();
+
+            result.Should().Be(false);
         }
 
         private interface IBase {};
         private class Implementation : IBase {};
-        private class Extensions : Implementation { };
+        private class Extension : Implementation { };
         private class Unrelated { };
 
     }
