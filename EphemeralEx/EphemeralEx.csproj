@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Version>1.0.20</Version>
-    <Company>Ephemeral Softworks</Company>
     <Authors>Chally</Authors>
+    <Company>Ephemeral Softworks</Company>
     <PackageProjectUrl>https://github.com/antikrem/EphemeralEx</PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
+    <RepositoryUrl>https://github.com/antikrem/EphemeralEx</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
