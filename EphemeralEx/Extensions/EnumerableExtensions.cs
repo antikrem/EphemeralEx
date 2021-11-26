@@ -17,6 +17,10 @@ namespace EphemeralEx.Extensions
             }
         }
 
+        public static IReadOnlyDictionary<S, T> IndexBy<T, S>(this IEnumerable<T> sequence, Func<T, S> indexer) //TODO: write test
+                where S : notnull
+            => sequence.ToDictionary(element => indexer(element), element => element);
+
         public static IEnumerable<T> NotNull<T>(this IEnumerable<T?> sequence)
         {
             foreach (var element in sequence)

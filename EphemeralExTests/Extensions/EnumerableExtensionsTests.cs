@@ -29,6 +29,41 @@ namespace EphemeralExTests.Extensions
         }
 
         [Test]
+        public void IndexBy_WithCorrectInput_CreatesExpectedDictionary()
+        {
+            var sequence = new List<(int Index, string Text)>
+            {
+                (1, "Foo"),
+                (3, "Fizz"),
+                (2, "Bar")
+            };
+
+            var result = sequence.IndexBy(item => item.Index);
+
+            result.Should().BeEquivalentTo(
+                new Dictionary<int, (int, string)>
+                {
+                    { 1, (1, "Foo") },
+                    { 3, (3, "Fizz") },
+                    { 2, (2, "Bar") }
+                }
+            );
+        }
+
+        [Test]
+        public void IndexBy_WithDuplicateIndex_ThrowsArgumentException()
+        {
+            var sequence = new List<(int Index, string Text)>
+            {
+                (1, "Foo"),
+                (3, "Bar"),
+                (3, "Bar2")
+            };
+
+            sequence.Invoking(sut => sut.IndexBy(item => item.Index)).Should().Throw<ArgumentException>();
+        }
+
+        [Test]
         public void NotNull_WithMixedElements_FiltersAllNulls()
         {
             var item1 = Dummy.String();
