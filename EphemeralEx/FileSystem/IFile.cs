@@ -7,8 +7,8 @@ namespace EphemeralEx.FileSystem
 {
     public class InvalidFilePath : Exception
     {
-        internal InvalidFilePath(string path)
-            : base($"{path} is not a valid path for a file or directory")
+        internal InvalidFilePath(string path, Exception inner)
+            : base($"{path} is not a valid path for a file or directory", inner)
         { }
     }
 
@@ -47,7 +47,7 @@ namespace EphemeralEx.FileSystem
             }
             catch (Exception e) when (e is FileNotFoundException or DirectoryNotFoundException)
             {
-                throw new InvalidFilePath(path);
+                throw new InvalidFilePath(path, e);
             }
         }
     }
