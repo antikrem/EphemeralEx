@@ -12,6 +12,14 @@ namespace EphemeralEx.FileSystem
         { }
     }
 
+    public abstract class InvalidFileType<T> : Exception
+        where T : IFile
+    {
+        public InvalidFileType(string path)
+            : base($"{path} does not point to a {typeof(T).Name}")
+        { }
+    }
+
     public interface IFile
     {
         FileType Type { get; }
@@ -31,7 +39,7 @@ namespace EphemeralEx.FileSystem
                 : new File(new FileInfo(path));
         }
 
-        private static FileAttributes GetAttributes(string path)
+        internal static FileAttributes GetAttributes(string path)
         {
             try
             {
