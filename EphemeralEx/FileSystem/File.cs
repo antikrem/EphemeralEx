@@ -31,6 +31,17 @@ namespace EphemeralEx.FileSystem
                 : new File(new FileInfo(path));
         }
 
+        public static File CreateNew(string path, byte[] contents)
+        {
+            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+
+            using var file = System.IO.File.Create(path);
+            file.Write(contents);
+            file.Flush();
+
+            return Create(path);
+        }
+
         public FileType Type => FileType.File;
 
         public string Name => _fileInfo.Name;
