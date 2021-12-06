@@ -16,28 +16,35 @@ namespace EphemeralEx.Injection
     {
         public static void AddRegisteredInjections(this IServiceCollection services)
         {
-            GetInjectionDefinitions()
+            GetInjectableInterfaces()
+                .ForEach(service => services.Add(CreateRegistration(service, GetImplementation(service))));
+
+            GetMultipleInjectableInterfaces()
                 .ForEach(
-                        definition => services.Add(CreateServiceDescription(definition))
-                    );
+                    service => GetImplementations(service)
+                        .ForEach(implementation=> services.Add(CreateRegistration(service, implementation)))
+                );
         }
 
-        private static IEnumerable<(Type service, Type implementation)> GetInjectionDefinitions()
-            => GetInjectableInterfaces()
-                .Select(service => (service, GetImplementation(service)));
 
-        private static ServiceDescriptor CreateServiceDescription((Type service, Type implementation) definition)
-            => new ServiceDescriptor(definition.service, definition.implementation, ServiceLifetime.Singleton);
+        private static ServiceDescriptor CreateRegistration(Type service, Type implementation)
+            => new(service, implementation, ServiceLifetime.Singleton);
+
+        private static IEnumerable<Type> GetInjectableInterfaces()
+            => ReflectionHelper
+                .AllTypes
+                .Where(type => type.IsAttributed<Injectable>());
+
+        private static IEnumerable<Type> GetMultipleInjectableInterfaces()
+            => ReflectionHelper
+                .AllTypes
+                .Where(type => type.IsAttributed<MultipleInjectable>());
 
         private static Type GetImplementation(Type serviceEntry)
         {
-            var implementations = ReflectionHelper
-                .AllTypes
-                .Where(implementation => serviceEntry.IsAssignableFrom(implementation) && implementation != serviceEntry);
-
             try
             {
-                return implementations.Single();
+                return GetImplementations(serviceEntry).Single();
             }
             catch (InvalidOperationException)
             {
@@ -45,9 +52,9 @@ namespace EphemeralEx.Injection
             }
         }
 
-        private static IEnumerable<Type> GetInjectableInterfaces()
+        private static IEnumerable<Type> GetImplementations(Type serviceEntry)
             => ReflectionHelper
                 .AllTypes
-                .Where(type => type.IsAttributed<Injectable>());
+                .Where(implementation => serviceEntry.IsAssignableFrom(implementation) && implementation != serviceEntry);
     }
 }
