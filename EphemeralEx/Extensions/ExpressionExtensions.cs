@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace EphemeralEx.Extensions
@@ -9,6 +11,12 @@ namespace EphemeralEx.Extensions
         {
             action(obj);
             return obj;
+        }
+
+        static public IEnumerable<S> Collect<T, S>(this T obj, params Func<T, S>[] functions)
+            where T : notnull
+        {
+            return functions.Select(function => function(obj));
         }
     }
 }
