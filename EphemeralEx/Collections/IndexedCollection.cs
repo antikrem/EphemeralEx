@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace EphemeralEx.Container
+namespace EphemeralEx.Collections
 {
     public class IndexedCollection<T, S>
         where T : notnull
