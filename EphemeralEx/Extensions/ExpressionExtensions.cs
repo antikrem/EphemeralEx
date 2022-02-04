@@ -13,10 +13,16 @@ namespace EphemeralEx.Extensions
             return obj;
         }
 
+        static public void Match<T>(this T? obj, Action<T> nonNullAction, Action nullAction)
+        {
+            if (obj != null)
+                nonNullAction(obj);
+            else
+                nullAction();
+        }
+
         static public IEnumerable<S> Collect<T, S>(this T obj, params Func<T, S>[] functions)
             where T : notnull
-        {
-            return functions.Select(function => function(obj));
-        }
+            => functions.Select(function => function(obj));
     }
 }

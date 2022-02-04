@@ -1,10 +1,12 @@
 ﻿using EphemeralEx.Extensions;
 
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using NUnit.Framework;
 using FluentAssertions;
-using System.Collections.Generic;
+
 
 namespace EphemeralExTests.Extensions
 {
@@ -19,6 +21,24 @@ namespace EphemeralExTests.Extensions
 
             obj.ActedOn.Should().BeTrue();
             result.Should().BeSameAs(obj);
+        }
+
+        [Test]
+        public void Match_WithNull_CallsNullAction()
+        {
+            TestInlineActionClass? obj = new();
+
+            obj.Match(o => o.Act(), () => throw new Exception());
+
+            obj!.ActedOn.Should().BeTrue();
+        }
+
+        [Test]
+        public void Match_WithNotNull_CallsNotNullAction()
+        {
+            TestInlineActionClass? obj = null;
+
+            obj.Match(o => throw new Exception(), () => { });
         }
 
         [Test]
