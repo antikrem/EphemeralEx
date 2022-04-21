@@ -8,7 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 using EphemeralEx.Tests;
-
+using System.Threading.Tasks;
 
 namespace EphemeralExTests.Extensions
 {
@@ -209,6 +209,19 @@ namespace EphemeralExTests.Extensions
             var result = start.ChainCall(sequence, (str, element) => str + element.ToString());
 
             result.Should().Be("Numbers:" + item1.ToString() + item2.ToString() + item3.ToString());
+        }
+
+        [Test]
+        public async Task Complete_WithSequence_InversesAsync()
+        {
+            var item1 = Dummy.Int(0, 1000);
+            var item2 = Dummy.Int(0, 1000);
+            var item3 = Dummy.Int(0, 1000);
+            var sequence = new Task<int>[] { Task.FromResult(item1), Task.FromResult(item2), Task.FromResult(item3) };
+
+            var result = await sequence.Complete();
+
+            result.Should().BeEquivalentTo(new int[] { item1, item2, item3 });
         }
     }
 }

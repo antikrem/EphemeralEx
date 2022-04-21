@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace EphemeralEx.Extensions
 {
@@ -80,5 +80,9 @@ namespace EphemeralEx.Extensions
                 ? action(target, sequence.First())
                     .ChainCall(sequence.Skip(1), action)
                 : target;
+
+        // TODO: move to TaskExtensions when more are needed
+        public static async Task<IEnumerable<T>> Complete<T>(this IEnumerable<Task<T>> sequence)
+            => await Task.WhenAll(sequence);
     }
 }
