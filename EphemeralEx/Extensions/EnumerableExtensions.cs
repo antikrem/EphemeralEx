@@ -33,11 +33,6 @@ namespace EphemeralEx.Extensions
         public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> sequence)
             => sequence.SelectMany(subSequence => subSequence);
 
-        public static IEnumerable<T> DistinctBy<T, S>(this IEnumerable<T> sequence, Func<T, S> indexer)
-            => sequence
-                .GroupBy(indexer)
-                .Select(group => group.First());
-
         public static IEnumerable<S> SelectSuccessful<E, T, S>(
             this IEnumerable<T> sequence,
             Func<T, S> selector,

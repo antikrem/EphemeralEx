@@ -92,18 +92,6 @@ namespace EphemeralExTests.Extensions
         }
 
         [Test]
-        public void DistinctBy_WithMixedElements_RemovesFollowingDuplicates()
-        {
-            var items = new (int Index, string Value)[] { (1, "a"), (2, "a"), (3, "a"), (1, "b") };
-
-            var result = items.DistinctBy(join => join.Index);
-
-            result.Should().BeEquivalentTo(
-                    new (int Index, string Value)[] { (1, "a"), (2, "a"), (3, "a") }
-                );
-        }
-
-        [Test]
         public void SelectSuccessful_WithCorrectUsage_OnlyTakesSuccessfulElements()
         {
             var items = new int[] { 1, 2, 0, 3 };
