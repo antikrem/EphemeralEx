@@ -200,6 +200,19 @@ namespace EphemeralExTests.Extensions
         }
 
         [Test]
+        public void With_WithSequenceAndElement_AppendsElement()
+        {
+            var item1 = Dummy.Int();
+            var item2 = Dummy.Int();
+            var item3 = Dummy.Int();
+            var sequence = new int[] { item1, item2 };
+
+            var result = sequence.With(item3);
+
+            result.Should().BeEquivalentTo(new int[] { item1, item2, item3 });
+        }
+
+        [Test]
         public async Task Complete_WithSequence_InversesAsync()
         {
             var item1 = Dummy.Int(0, 1000);

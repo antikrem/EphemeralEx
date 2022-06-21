@@ -76,6 +76,14 @@ namespace EphemeralEx.Extensions
                     .ChainCall(sequence.Skip(1), action)
                 : target;
 
+        public static IEnumerable<T> With<T>(this IEnumerable<T> sequence, T element)
+        {
+            foreach (var e in sequence)
+                yield return e;
+
+            yield return element;
+        }
+
         // TODO: move to TaskExtensions when more are needed
         public static async Task<IEnumerable<T>> Complete<T>(this IEnumerable<Task<T>> sequence)
             => await Task.WhenAll(sequence);
