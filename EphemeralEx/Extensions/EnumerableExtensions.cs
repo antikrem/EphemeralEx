@@ -90,6 +90,12 @@ namespace EphemeralEx.Extensions
         public static T? FirstOrNull<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
             => sequence.FirstOrDefault(predicate);
 
+        public static T? SingleOrNull<T>(this IEnumerable<T> sequence)
+            => sequence.SingleOrDefault();
+
+        public static T? SingleOrNull<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
+            => sequence.SingleOrDefault(predicate);
+
         // TODO: move to TaskExtensions when more are needed
         public static async Task<IEnumerable<T>> Complete<T>(this IEnumerable<Task<T>> sequence)
             => await Task.WhenAll(sequence);
