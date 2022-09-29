@@ -26,5 +26,8 @@ namespace EphemeralEx.Extensions
 
         public static string Concat(this IEnumerable<char> chars)
             => string.Concat(chars);
+
+        public static string JoinWith(this IEnumerable<string> strs, string seperator)
+            => string.Join(seperator, strs);
     }
 }

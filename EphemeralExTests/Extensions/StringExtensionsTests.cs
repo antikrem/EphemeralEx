@@ -37,6 +37,14 @@ namespace EphemeralExTests.Extensions
             characters.Concat().Should().Be("abc");
         }
 
+        [Test]
+        public void JoinWith_NormalStringAndSeperator_CorrectlyConcats()
+        {
+            var strs = new[] { "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog" };
+
+            strs.JoinWith(" ").Should().Be("The quick brown fox jumps over the lazy dog");
+        }
+
         static private void AssertMatchSuccess(string input, string regex, string expected)
         {
             input.MatchFirst(regex).Should().Be(expected);
