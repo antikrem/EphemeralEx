@@ -64,7 +64,7 @@ namespace EphemeralEx.Extensions
             }
         }
 
-        public static IEnumerable<T> ToEnumerable<T>(this T element)
+        public static IReadOnlyList<T> ToEnumerable<T>(this T element)
             => new List<T> { element };
 
         public static bool None<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
